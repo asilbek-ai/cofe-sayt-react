@@ -11,23 +11,6 @@ function Deliver() {
         <div className="max-w-7xl mx-auto flex justify-between items-center py-6 px-4">
           <img src={rasm} alt="" />
 
-          {/* <ul className="flex gap-10 text-sm font-semibold">
-                <li>
-                    <a className="text-[#574F4D] hover:text-[#C47F17] transition" href="./index.html">HOME</a>
-                </li>
-                <li>
-                    <a className="text-[#574F4D] hover:text-[#C47F17] transition" href="./index2.html">CHECKOUT</a>
-                </li>
-                <li>
-                    <a className="text-[#574F4D] hover:text-[#C47F17] transition" href="./index3.html">SUCCESS</a>
-                </li>
-                <li>
-                    <a className="text-[#574F4D] hover:text-[#C47F17] transition" href="./adminProducts.html">Admin Product</a>
-                </li>
-                <li>
-                    <a className="text-[#574F4D] hover:text-[#C47F17] transition" href="./order.html">Order Product</a>
-                </li>
-            </ul> */}
           <Header />
 
           <div className="flex gap-3">

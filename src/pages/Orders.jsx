@@ -8,10 +8,7 @@ function Orders() {
     <body className="m-auto mb-20">
   <header className="sticky top-0 bg-white/80 backdrop-blur shadow z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center py-6 px-4">
-            
-    <img src={rasm} alt="" />            
-
-            
+    <img src={rasm} alt="" />                
      <Header/>
             <div className="flex gap-3">
                 <div
