@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import rasm from "../../public/Logo.png";
 import img from "../../public/imagem.png";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 function Menu() {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -31,16 +33,21 @@ function Menu() {
           : item
       )
     );
+
+
   };
+  function carshop(){
+    navigate("/orders")
+  }
 
   return (
-    <div>
+    <div className="">
     
      <header className="sticky top-0 bg-white/80 backdrop-blur shadow z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center py-6 px-4">
     <img src={rasm} alt="" />                
      <Header/>
-            <div className="flex gap-3">
+            <div className="flex gap-3 ">
                 <div
                     className="flex items-center gap-2 text-[#4B2995] bg-[#EBE5F9] px-4 py-2 rounded-xl text-sm font-medium">
                     <i className="fa-solid fa-location-dot"></i>
@@ -55,7 +62,7 @@ function Menu() {
         </div>
     </header>
 
-      <div className="flex gap-5 items-center max-w-7xl m-auto">
+      <div className="flex gap-5 items-center max-w-7xl m-auto mt-20">
         <div class="max-w-[60%]">
             <div>
                 <h1 class="text-5xl font-extrabold mb-6">
@@ -69,7 +76,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#C47F17] inline-block rounded-[50%] text-sm">
-                            <i class="fa-solid fa-cart-shopping  text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-cart-shopping  text-[#fff]"></i>
                         </div>
                         <p>
                             Compra simples e segura
@@ -77,7 +84,7 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#DBAC2C] inline-block rounded-[50%] text-sm">
-                            <i class="fa-solid fa-alarm-clock text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-alarm-clock text-[#fff]"></i>
                         </div>
                         <p>
                             Entrega rápida e rastreada
@@ -87,7 +94,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#574F4D] inline-block rounded-[50%] text-sm">
-                            <i class="fa-solid fa-box-open text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-box-open text-[#fff]"></i>
                         </div>
                         <p>
                             Embalagem mantém o café intacto
@@ -95,7 +102,7 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#8047F8] inline-block rounded-[50%] text-sm">
-                            <i class="fa-solid fa-mug-saucer text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-mug-saucer text-[#fff]"></i>
 
                         </div>
                         <p>
@@ -106,7 +113,7 @@ function Menu() {
                 </div>
             </div>
         </div>
-        <img src={img} alt="" />
+        <img className=" animate-spin [animation-duration:19s]" src={img} alt="" />
       </div>
 
       <div className="mt-20 max-w-7xl m-auto">
@@ -124,7 +131,7 @@ function Menu() {
                 <img
                   src={`/images/${item.img}`}
                   alt={item.name}
-                  className="w-44 h-34 object-contain"
+                  className="w-44 h-34 animate-spin [animation-duration:2s] object-contain"
                 />
               </div>
 
@@ -175,7 +182,7 @@ function Menu() {
                   </button>
                 </div>
 
-                <button className="p-3 bg-[#4B2995] rounded-xl hover:bg-[#3a1f7a] transition">
+                <button onClick={carshop} className="p-3 bg-[#4B2995] rounded-xl hover:bg-[#3a1f7a] transition">
                   <i className="fa-solid fa-cart-shopping text-white"></i>
                 </button>
               </div>
@@ -183,6 +190,9 @@ function Menu() {
           ))}
         </div>
       </div>
+
+
+      
     </div>
   );
 }

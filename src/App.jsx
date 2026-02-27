@@ -4,16 +4,21 @@ import Orders from "./pages/Orders";
 import Deliver from "./pages/Deliver"
 import Login from "./components/Login";
 import Admins from "./pages/Admins";
+import ErorPage from "./components/help/ErorPage";
+import Xatolik from "./components/help/xatolik";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Menu />} />
+            <Route path="/" element={<ErorPage />} />
+      <Route path="/menu" element={<Menu />} />
         <Route path="/login" element={<Login />} />
-      <Route path="/Admins" element={<Admins />} />
-      <Route path="/Admin/login" element={<Login />} />
-      <Route path="/Menu" element={<Menu />} />
-      <Route path="/Orders" element={<Orders />} />
-      <Route path="/Deliver" element={<Deliver />} />
+      <Route path="/admins" element={<Admins />} />
+      <Route path="/admin/login" element={<Login />} />
+      <Route path="/menu" element={<Menu />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/deliver" element={<Deliver />} />
+      <Route path="/*" element={<Xatolik />} />
+
     </Routes>
   );
 }

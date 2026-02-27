@@ -1,0 +1,39 @@
+import React from 'react'
+import "../help/xatolik.css"
+
+function Xatolik() {
+  return (
+<div class="card">
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="orb orb--3"></div>
+  <div class="orb orb--4"></div>
+
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-msg">Nothing to see here.</div>
+    <a href="/" class="home-btn">Go Home</a>
+  </div>
+
+  <div class="duck__wrapper">
+    <div class="duck">
+      <div class="duck__inner">
+        <div class="duck__mouth"></div>
+        <div class="duck__head">
+          <div class="duck__eye"></div>
+          <div class="duck__white"></div>
+        </div>
+        <div class="duck__body"></div>
+        <div class="duck__wing"></div>
+      </div>
+      <div class="duck__foot duck__foot--1"></div>
+      <div class="duck__foot duck__foot--2"></div>
+      <div class="surface"></div>
+    </div>
+  </div>
+</div>
+
+  )
+}
+
+export default Xatolik

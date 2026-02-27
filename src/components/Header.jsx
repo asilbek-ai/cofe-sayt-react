@@ -10,7 +10,7 @@ function Header() {
                     <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Menu"}>Menu</Link>
                     <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Orders"}>Orders</Link>
                     <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Deliver"}>Deliver</Link>
-                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Login"}>Login</Link>
+                    {/* <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Login"}>Login</Link> */}
                 </div>
             </nav>
         </div>
