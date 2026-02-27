@@ -57,9 +57,86 @@ function Admins() {
   {
     id: 8,
     name: "Expresso Tradicional",
-    description: "O tradicional café feito com água quente e grãos moídos",
+    description: "Meio a meio de expresso tradicional com leite vaporizado",
     price: 990,
     img: "card_1.svg",
+  },
+   {
+    id: 9,
+    name: "Expresso Americano",
+    description: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+    price: 980,
+    img: "caed_9.svg",
+  },
+     {
+    id: 10,
+    name: "Expresso Cremoso",
+    description: "Bebida com canela feita de doses iguais de café, leite e espuma",
+    price: 980,
+    img: "card_10.svg",
+  },
+       {
+    id: 11,
+    name: "Expresso Gelado",
+    description: "Café expresso misturado com um pouco de leite quente e espuma",
+    price: 980,
+    img: "card_11.svg",
+  },
+       {
+    id: 12,
+    name: "Café com Leite",
+    description: "Café expresso com calda de chocolate, pouco leite e espuma",
+    price: 980,
+    img: "card_12.svg",
+  },
+         {
+    id: 13,
+    name: "Latte",
+    description: "Bebida feita com chocolate dissolvido no leite quente e café",
+    price: 980,
+    img: "cofe_13.svg",
+  },
+         {
+    id: 14,
+    name: "Capuccino",
+    description: "Drink gelado de café expresso com rum, creme de leite e hortelã",
+    price: 980,
+    img: "card_14.svg",
+  },
+         {
+    id: 15,
+    name: "Macchiato Mocaccino",
+    description: "Bebida adocicada preparada com café e leite de coco",
+    price: 980,
+    img: "card_15.svg",
+  },
+         {
+    id: 16,
+    name: "Chocolate Quente",
+    description: "Bebida preparada com grãos de café árabe e especiarias",
+    price: 980,
+    img: "card_16.svg",
+  },
+         {
+    id: 17,
+    name: "Cubano",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    price: 980,
+    img: "card_17.svg",
+  },
+         {
+    id: 18,
+    name: "Havaiano",
+    description: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
+    price: 980,
+    img: "card_18.svg",
+  },
+         {
+    id: 19,
+    name: "Irlandês",
+    description: "Expresso diluído, menos intenso que o tradicional",
+    price: 198,
+    img: "card_19.svg",
   },
   ];
 
@@ -72,6 +149,17 @@ function Admins() {
     "card_6.svg",
     "card_7.svg",
     "card_8.svg",
+    "caed_9.svg",
+    "card_10.svg",
+    "card_11.svg",
+    "card_12.svg",
+    "cofe_13.svg",
+    "card_14.svg",
+     "card_15.svg",
+     "card_16.svg",
+     "card_17.svg",
+     "card_18.svg",
+     "card_19.svg",
   ];
 
   const [cofes, setCofes] = useState([]);
@@ -134,18 +222,26 @@ function Admins() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <aside className="w-[250px] bg-indigo-900 text-white p-6">
-        <h2 className="text-2xl font-bold mb-10 text-center">☕ Admin</h2>
+    <div className="flex  min-h-screen bg-gray-100">
+      <div className=" fixed min-h-screen w-[290px] bg-indigo-900 text-white p-6 ">
+        <h2 className="text-5xl font-bold mb-10 text-center mt-9">☕ Admin</h2>
         <div
           onClick={() => navigate("/")}
           className="cursor-pointer p-3 rounded bg-white/10 hover:bg-white/20"
         >
-          Home
+         🏚 Home
         </div>
-      </aside>
-
-      <main className="flex-1 p-10">
+        <div
+                  className="cursor-pointer mt-6 p-3 rounded bg-white/10 hover:bg-white/20"
+>
+          <h1>🛒 Menu</h1>
+          
+        </div>
+      </div>
+    <div className="text-[#f3f4f6]">
+      djijhojigdgjfdiohjfdoijhdfhdgjiorejytoiljoiryjtj
+    </div>
+      <div className="flex-1  min-h-screen   p-10">
         <div className="flex justify-between mb-8">
           <h1 className="text-3xl font-bold">Products</h1>
           <button
@@ -156,7 +252,7 @@ function Admins() {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8 justify-center ">
           <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow">
             <table className="w-full text-center">
               <thead>
@@ -206,7 +302,7 @@ function Admins() {
             </table>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow">
+          <div className=" fixed top-0 left-285 right-0 min-h-screen bg-white p-6 rounded- shadow">
             <h2 className="text-xl font-bold mb-4">
               {editIndex === -1 ? "Add Product" : "Edit Product"}
             </h2>
@@ -264,7 +360,7 @@ function Admins() {
             </button>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

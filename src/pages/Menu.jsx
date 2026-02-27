@@ -112,7 +112,7 @@ function Menu() {
       <div className="mt-20 max-w-7xl m-auto">
         <h1 className="text-2xl font-medium mb-6">Nossos cafés</h1>
 
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-evenly">
           {products.map((item) => (
             <div
               key={item.id}
@@ -151,7 +151,7 @@ function Menu() {
                 <div className="flex items-end gap-1">
                   <span className="text-sm text-[#574F4D]">R$</span>
                   <span className="text-2xl font-extrabold text-[#574F4D]">
-                    {item.price / 100}
+                    {item.price}
                   </span>
                 </div>
 
