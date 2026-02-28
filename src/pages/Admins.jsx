@@ -217,7 +217,7 @@ function Admins() {
 
   function handleEdit(index) {
     setForm(cofes[index]);
-    setEditIndex(index);
+    (index);
   }
 
   function handleRefresh() {
@@ -235,8 +235,8 @@ function Admins() {
         >
           🏚 Home
         </div>
-        <div className="cursor-pointer mt-6 p-3 rounded bg-white/10 hover:bg-white/20">
-          <h1>🛒 Menu</h1>
+        <div onClick={() => navigate("/orderpanel")} className="cursor-pointer mt-6 p-3 rounded bg-white/10 hover:bg-white/20">
+          <h1>🛒 Order Panel</h1>
         </div>
       </div>
       <div className="text-[#f3f4f6]">

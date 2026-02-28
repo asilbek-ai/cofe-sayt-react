@@ -7,10 +7,10 @@ function Header() {
                 <div>
                 </div>
                 <div className='flex gap-4 font-mono'>
-                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Menu"}>Menu</Link>
-                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Orders"}>Orders</Link>
-                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Deliver"}>Deliver</Link>
-                    {/* <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/Login"}>Login</Link> */}
+                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/menu"}>Menu</Link>
+                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/orders"}>Orders</Link>
+                    <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/deliver"}>Deliver</Link>
+                    {/* <Link className='hover:border-b-green hover:text-green-500 font-bold' to={"/orderpanel"}>orderpanel</Link> */}
                 </div>
             </nav>
         </div>

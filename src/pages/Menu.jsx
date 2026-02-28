@@ -37,7 +37,11 @@ function Menu() {
 
   };
   function carshop(){
-    navigate("/orders")
+    if(carshop.length == 0){
+      navigate("/orders")
+    }else{
+      alert("mahsulot tanlang")
+    }
   }
 
   return (
