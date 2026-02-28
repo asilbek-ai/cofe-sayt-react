@@ -76,7 +76,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#C47F17] inline-block rounded-[50%] text-sm">
-                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-cart-shopping  text-[#fff]"></i>
+                            <i class="  fa-solid fa-cart-shopping  text-[#fff]"></i>
                         </div>
                         <p>
                             Compra simples e segura
@@ -84,7 +84,7 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#DBAC2C] inline-block rounded-[50%] text-sm">
-                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-alarm-clock text-[#fff]"></i>
+                            <i class="  fa-solid fa-alarm-clock text-[#fff]"></i>
                         </div>
                         <p>
                             Entrega rápida e rastreada
@@ -94,7 +94,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#574F4D] inline-block rounded-[50%] text-sm">
-                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-box-open text-[#fff]"></i>
+                            <i class="  fa-solid fa-box-open text-[#fff]"></i>
                         </div>
                         <p>
                             Embalagem mantém o café intacto
@@ -102,8 +102,8 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#8047F8] inline-block rounded-[50%] text-sm">
-                            <i class=" animate-spin [animation-duration:2s] fa-solid fa-mug-saucer text-[#fff]"></i>
-
+                            <i class="  fa-solid fa-mug-saucer text-[#fff]"></i>
+{/* animate-spin [animation-duration:2s] */}
                         </div>
                         <p>
                             O café chega fresquinho até você
@@ -113,7 +113,7 @@ function Menu() {
                 </div>
             </div>
         </div>
-        <img className=" animate-spin [animation-duration:19s]" src={img} alt="" />
+        <img className="" src={img} alt="" />
       </div>
 
       <div className="mt-20 max-w-7xl m-auto">
@@ -131,7 +131,7 @@ function Menu() {
                 <img
                   src={`/images/${item.img}`}
                   alt={item.name}
-                  className="w-44 h-34 animate-spin [animation-duration:2s] object-contain"
+                  className="w-44 h-34  object-contain"
                 />
               </div>
 

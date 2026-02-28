@@ -275,7 +275,7 @@ function Admins() {
                       <img
                         src={`/images/${item.img}`}
                         alt={item.name}
-                        className="w-16 h-16  animate-spin [animation-duration:2s] object-cover mx-auto"
+                        className="w-16 h-16   object-cover mx-auto"
                       />
                     </td>
 
