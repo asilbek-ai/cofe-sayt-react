@@ -60,7 +60,7 @@ function Menu() {
 
                 <div 
                     className="relative text-[#C47F17] bg-[#F1E9C9] p-3 rounded-xl hover:scale-105 transition">
-                    <i className="fa-solid fa-cart-shopping text-lg"></i>
+                    <i className=" fa-solid fa-cart-shopping text-lg"></i>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#C47F17] inline-block rounded-[50%] text-sm">
-                            <i class="  fa-solid fa-cart-shopping  text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s]  fa-solid fa-cart-shopping  text-[#fff]"></i>
                         </div>
                         <p>
                             Compra simples e segura
@@ -88,7 +88,7 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#DBAC2C] inline-block rounded-[50%] text-sm">
-                            <i class="  fa-solid fa-alarm-clock text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s]  fa-solid fa-alarm-clock text-[#fff]"></i>
                         </div>
                         <p>
                             Entrega rápida e rastreada
@@ -98,7 +98,7 @@ function Menu() {
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="p-2 bg-[#574F4D] inline-block rounded-[50%] text-sm">
-                            <i class="  fa-solid fa-box-open text-[#fff]"></i>
+                            <i class=" animate-spin [animation-duration:2s]  fa-solid fa-box-open text-[#fff]"></i>
                         </div>
                         <p>
                             Embalagem mantém o café intacto
@@ -106,8 +106,7 @@ function Menu() {
                     </div>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="p-2 bg-[#8047F8] inline-block rounded-[50%] text-sm">
-                            <i class="  fa-solid fa-mug-saucer text-[#fff]"></i>
-{/* animate-spin [animation-duration:2s] */}
+                            <i class=" animate-spin [animation-duration:2s]  fa-solid fa-mug-saucer text-[#fff]"></i>
                         </div>
                         <p>
                             O café chega fresquinho até você
@@ -135,7 +134,7 @@ function Menu() {
                 <img
                   src={`/images/${item.img}`}
                   alt={item.name}
-                  className="w-44 h-34  object-contain"
+                  className="w-44 h-34   transition-all duration-900 group animate-spin [animation-duration:2s] object-contain"
                 />
               </div>
 

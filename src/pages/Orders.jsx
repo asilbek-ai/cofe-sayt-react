@@ -1,43 +1,42 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import rasm from "../../public/Logo.png";
 import cofe1 from "../../public/images/card_1.svg";
 
 function Orders() {
-  function getOrders() {
-    let data = JSON.parse(localStorage.getItem("orders"));
-    if (!data) return [];
-    if (!Array.isArray(data)) return [data];
-    return data;
-  }
+  // const navigate = useNavigate()
+  const [products, setProducts] = useState([]);
 
-  function saveOrders(orders) {
-    localStorage.setItem("orders", JSON.stringify(orders));
-  }
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("cofes"));
+    if (stored) {
+      const withCount = stored.map((item) => ({ ...item, count: 0 }));
+      setProducts(withCount);
+    }
+  }, []);
 
-  function drawOrders() {
-    let orders = getOrders();
-    let cofes = JSON.parse(localStorage.getItem("cofes")) || [];
+  
+  const increase = (id) => {
+    setProducts(
+      products.map((item) =>
+        item.id === id ? { ...item, count: item.count + 1 } : item
+      )
+    );
+  };
 
-    orders.forEach((order, index) => {
-      let coffeeHTML = "";
+  const decrease = (id) => {
+    setProducts(
+      products.map((item) =>
+        item.id === id && item.count > 0
+          ? { ...item, count: item.count - 1 }
+          : item
+      )
+    );
 
-      if (order.orders && Array.isArray(order.orders)) {
-        order.orders.forEach((item) => {
-          let product = cofes.find((c) => c.id == item.cofeId);
-        });
-      }
-    });
-  }
 
-  function deleteOrder(index) {
-    let order = getOrders();
-    order.splice(index, 1);
-    saveOrders(order);
-    drawOrders();
-  }
+  };
 
-  drawOrders();
   return (
     <div className="m-auto mb-20">
       <header className="sticky top-0 bg-white/80 backdrop-blur shadow z-50">
@@ -132,7 +131,10 @@ function Orders() {
           </div>
         </div>
 
-        <div className="w-[45%]">
+
+            {products.map((item)=>{
+                <div
+               key={item.id} className="w-[45%] ">
           <h1 className="text-xl font-bold mt-10">Cafés selecionados</h1>
           <div className="bg-[#F3F2F2] flex gap-4 justify-between item-center rounded-2xl mt-4 px-10 py-4">
             <div>
@@ -142,25 +144,33 @@ function Orders() {
               <p className="my-2 font-bold">Expresso Tradicional</p>
               <div className="flex gap-4">
                 <div className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
-                <button className="text-[#8047F8] font-bold hover:scale-125 transition">
-                  −
-                </button>
+                  <button
+                    onClick={() => decrease(item.id)}
+                    className="text-[#8047F8] font-bold hover:scale-125 transition"
+                  >
+                    −
+                  </button>
 
-                <span className="font-semibold text-[#403937]">1</span>
+                   <span className="font-semibold text-[#403937]">
+                    {item.count}
+                  </span>
 
-                <button className="text-[#8047F8] font-bold hover:scale-125 transition">
-                  +
-                </button>
-              </div>
-              <div  className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
-                <button  className="text-[#8047F8]  hover:scale-125 transition"> <i class="fa-regular fa-trash-can"></i> Remover</button>
-              </div>
+                  <button
+                    onClick={() => increase(item.id)}
+                    className="text-[#8047F8] font-bold hover:scale-125 transition"
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
+                  <button className="text-[#8047F8]  hover:scale-125 transition">
+                    <i class="fa-regular fa-trash-can"></i> Remover
+                  </button>
+                </div>
               </div>
             </div>
             <div className="mt-2 font-bold">
-              <p >
-                R$ 9,90
-              </p>
+              <p>R$ 9,90</p>
             </div>
           </div>
           <div className="bg-[#F3F2F2]  rounded-2xl mt-20 px-10">
@@ -191,9 +201,10 @@ function Orders() {
             </div>
           </div>
         </div>
+            })}
       </div>
     </div>
-  );
+  )
 }
 
 export default Orders;

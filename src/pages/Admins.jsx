@@ -195,9 +195,7 @@ function Admins() {
     if (!form.name || !form.price || !form.img) return;
 
     if (editIndex === -1) {
-      const newItem = {
-        ...form,
-        id: cofes.length ? cofes[cofes.length - 1].id + 1 : 1,
+      const newItem = { ...form, id: cofes.length ? cofes[cofes.length - 1].id + 1 : 1,
       };
       setCofes([...cofes, newItem]);
     } else {
@@ -215,9 +213,9 @@ function Admins() {
     setCofes(updated);
   }
 
-  function handleEdit(index) {
+   function handleEdit(index) {
     setForm(cofes[index]);
-    (index);
+    setEditIndex(index); 
   }
 
   function handleRefresh() {
@@ -235,7 +233,10 @@ function Admins() {
         >
           🏚 Home
         </div>
-        <div onClick={() => navigate("/orderpanel")} className="cursor-pointer mt-6 p-3 rounded bg-white/10 hover:bg-white/20">
+        <div
+          onClick={() => navigate("/orderpanel")}
+          className="cursor-pointer mt-6 p-3 rounded bg-white/10 hover:bg-white/20"
+        >
           <h1>🛒 Order Panel</h1>
         </div>
       </div>
@@ -243,7 +244,7 @@ function Admins() {
         djijhojigdgjfdiohjfdoijhdfhdgjiorejytoiljoi
       </div>
       <div className="flex-1  min-h-screen   p-10">
-        <div className="flex justify-between mb-8">
+        <div className="flex gap-20 mb-8">
           <h1 className="text-3xl font-bold">Products</h1>
           <button
             onClick={handleRefresh}
@@ -339,8 +340,8 @@ function Admins() {
                 onChange={(e) => setForm({ ...form, img: e.target.value })}
               >
                 <option value="">Select image</option>
-                {images.map((img, i) => (
-                  <option key={i} value={img}>
+                {images.map((img) => (
+                  <option>
                     {img}
                   </option>
                 ))}
