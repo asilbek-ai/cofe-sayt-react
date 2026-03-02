@@ -1,210 +1,271 @@
-import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import rasm from "../../public/Logo.png";
-import cofe1 from "../../public/images/card_1.svg";
 
 function Orders() {
-  // const navigate = useNavigate()
-  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
+  const [basket, setBasket] = useState([]);
+  const [cofes, setCofes] = useState([]);
+  const [form, setForm] = useState({
+    fio: "",
+    location: "",
+    phone: "",
+  });
+
+ 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("cofes"));
-    if (stored) {
-      const withCount = stored.map((item) => ({ ...item, count: 0 }));
-      setProducts(withCount);
-    }
+    const storedCofes =
+      JSON.parse(localStorage.getItem("cofes")) || [];
+
+    const storedBasket =
+      JSON.parse(localStorage.getItem("car-shop")) || [];
+
+    setCofes(storedCofes);
+    setBasket(storedBasket);
   }, []);
 
+ 
+  const saveBasket = (data) => {
+    localStorage.setItem("car-shop", JSON.stringify(data));
+    setBasket(data);
+  };
+
   
-  const increase = (id) => {
-    setProducts(
-      products.map((item) =>
-        item.id === id ? { ...item, count: item.count + 1 } : item
-      )
+  const getProduct = (id) => {
+    return cofes.find(
+      (c) => Number(c.id) === Number(id)
     );
   };
 
-  const decrease = (id) => {
-    setProducts(
-      products.map((item) =>
-        item.id === id && item.count > 0
+  
+  const addCofe = (id) => {
+    const updated = [...basket];
+    const existing = updated.find(
+      (item) => Number(item.cofeId) === Number(id)
+    );
+
+    if (existing) {
+      existing.count += 1;
+    } else {
+      updated.push({ cofeId: id, count: 1 });
+    }
+
+    saveBasket(updated);
+  };
+
+ 
+  const removeCofe = (id) => {
+    const updated = basket
+      .map((item) =>
+        Number(item.cofeId) === Number(id)
           ? { ...item, count: item.count - 1 }
           : item
       )
-    );
+      .filter((item) => item.count > 0);
 
-
+    saveBasket(updated);
   };
 
+  
+  const removeItem = (id) => {
+    const updated = basket.filter(
+      (item) => Number(item.cofeId) !== Number(id)
+    );
+
+    saveBasket(updated);
+  };
+
+  const sum = basket.reduce((total, item) => {
+    const product = getProduct(item.cofeId);
+    if (!product) return total;
+
+    return total + product.price * item.count;
+  }, 0);
+
+  const entrega = basket.length > 0 ? 350 : 0;
+  const total = sum + entrega;
+
+  const confirmOrder = () => {
+    if (
+      form.fio.length < 3 ||
+      form.location.length < 3 ||
+      form.phone.length < 7
+    ) {
+      alert("Ma'lumotlarni to‘g‘ri kiriting");
+      return;
+    }
+
+    if (basket.length === 0) {
+      alert("Savatcha bo‘sh");
+      return;
+    }
+
+    const newOrder = {
+      ...form,
+      orders: basket,
+      date: new Date().toISOString(),
+    };
+
+    const allOrders =
+      JSON.parse(localStorage.getItem("orders")) || [];
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify([...allOrders, newOrder])
+    );
+
+    localStorage.removeItem("car-shop");
+    setBasket([]);
+
+    navigate("/Deliver");
+  };
+  
+
   return (
-    <div className="m-auto mb-20">
-      <header className="sticky top-0 bg-white/80 backdrop-blur shadow z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center py-6 px-4">
-          <img src={rasm} alt="" />
-          <Header />
-          <div className="flex gap-3">
-            <div className="flex items-center gap-2 text-[#4B2995] bg-[#EBE5F9] px-4 py-2 rounded-xl text-sm font-medium">
-              <i className="fa-solid fa-location-dot"></i>
-              Porto Alegre, RS
-            </div>
+    <div>
+         <Header/>
+    <div className="max-w-7xl mx-auto flex gap-20 mt-10">
+      
+          <div className="w-1/2">
+        <h1 className="text-xl font-bold">
+          Complete seu pedido
+        </h1>
 
-            <div className="relative text-[#C47F17] bg-[#F1E9C9] p-3 rounded-xl hover:scale-105 transition">
-              <i className="fa-solid fa-cart-shopping text-lg"></i>
-            </div>
-          </div>
+        <div className="bg-[#F3F2F2] p-10 rounded-2xl mt-4">
+          <input
+            className="w-full p-3 bg-[#EDEDED] mb-4"
+            placeholder="FIO"
+            value={form.fio}
+            onChange={(e) =>
+              setForm({ ...form, fio: e.target.value })
+            }
+          />
+
+          <input
+            className="w-full p-3 bg-[#EDEDED] mb-4"
+            placeholder="MANZIL"
+            value={form.location}
+            onChange={(e) =>
+              setForm({ ...form, location: e.target.value })
+            }
+          />
+
+          <input
+            className="w-full p-3 bg-[#EDEDED]"
+            placeholder="TELEFON"
+            value={form.phone}
+            onChange={(e) =>
+              setForm({ ...form, phone: e.target.value })
+            }
+          />
+
+          <button
+            onClick={confirmOrder}
+            className="mt-6 w-full bg-[#DBAC2C] text-white py-3 rounded-xl"
+          >
+            Tasdiqlash
+          </button>
         </div>
-      </header>
+      </div>
 
-      <div className="flex max-w-7xl mx-auto gap-25 ">
-        <div className="mt-10">
-          <h1 className="text-xl font-bold">Complete seu pedido</h1>
-          <div className="bg-[#F3F2F2] p-10  rounded-2xl mt-4">
-            <div className="flex mb-10">
-              <div>
-                <i className="fa-solid fa-location-dot text-[#C47F17] "></i>
-              </div>
-              <div>
-                <p className="text-xl text-[#403937]">Endereço de Entrega</p>
-                <p className="text-[#574F4D]">
-                  Informe o endereço onde deseja receber seu pedido
-                </p>
-              </div>
-            </div>
-            <div>
-              <input
-                className="bg-[#EDEDED] p-3 rounded-sm border-1 border-[#E6E5E5] w-full"
-                type="text"
-                placeholder="FIO"
-              />
-            </div>
-            <div>
-              <input
-                className="bg-[#EDEDED] p-3 rounded-sm mt-4 mb-4 w-full border-1 border-[#E6E5E5]"
-                type="text"
-                placeholder="MANZIL"
-              />
-            </div>
-            <div className="flex gap-4 mb-4">
-              <input
-                className="bg-[#EDEDED] w-full p-3 rounded-sm border-1 border-[#E6E5E5]"
-                type="number"
-                placeholder="TELEFON RAQAM"
-              />
-            </div>
+      <div className="w-1/2">
+        <h1 className="text-xl font-bold">
+          Tanlangan Cofelar
+        </h1>
 
-            <div className="flex gap-2">
-              <button class="text-2xl cursor-pointer font-semibold text-[#fff] bg-[#DBAC2C] py-3 w-full rounded-xl">
-                Tasdiqlash
-              </button>
-            </div>
-          </div>
-          <div className="mt-20 bg-[#F3F2F2] p-10  rounded-2xl">
-            <div>
-              <div className="flex mb-10 gap-2">
-                <div>
-                  <i className="fa-solid fa-dollar-sign text-[#8047F8] text-xl"></i>
+        <div className="bg-[#F3F2F2] rounded-2xl mt-4 p-6">
+          {basket.length === 0 && (
+            <p>Savatcha bo‘sh</p>
+          )}
+
+          {basket.map((item) => {
+            const product = getProduct(item.cofeId);
+            if (!product) return null;
+
+            return (
+              <div
+                key={item.cofeId}
+                className="flex justify-between items-center mb-6"
+              >
+                <div className="flex gap-4">
+                  <img
+                    className="w-16"
+                    src={`/images/${product.img}`}
+                    alt=""
+                  />
+
+                  <div>
+                    <h1>{product.name}</h1>
+
+                    <div className="flex gap-3 mt-2">
+                      <div className="flex bg-[#E6E5E5] px-4 rounded-lg gap-3">
+                        <button
+                          onClick={() =>
+                            removeCofe(product.id)
+                          }
+                        >
+                          −
+                        </button>
+
+                        <span>{item.count}</span>
+
+                        <button
+                          onClick={() =>
+                            addCofe(product.id)
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        onClick={() =>
+                          removeItem(product.id)
+                        }
+                        className="bg-red-200 px-4 rounded-lg"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xl text-[#403937]">Pagamento</p>
-                  <p className="text-[#574F4D]">
-                    O pagamento é feito na entrega. Escolha a forma que deseja
-                    pagar
-                  </p>
-                </div>
+
+                <h1 className="font-bold">
+                  {product.price * item.count} $$$
+                </h1>
               </div>
-            </div>
-            <div className="flex gap-4 py-5">
-              <div className="bg-[#EDEDED] p-4 rounded-sm border-1 border-[#E6E5E5] hover:bg-[#EBE5F9] hover:border-[#8047F8]">
-                <i className="fa-solid fa-money-check-dollar text-[#8047F8]"></i>{" "}
-                Cartão de crédito
-              </div>
-              <div className="bg-[#EDEDED] p-4 rounded-sm border-1 border-[#E6E5E5] hover:bg-[#EBE5F9] hover:border-[#8047F8]">
-                <i className="fa-solid fa-building-columns text-[#8047F8]"></i>{" "}
-                cartão de débito
-              </div>
-              <div className="bg-[#EDEDED] p-4 rounded-sm border-1 border-[#E6E5E5] w-40 text-center  hover:bg-[#EBE5F9] hover:border-[#8047F8] ">
-                <i className="fa-solid fa-window-maximize text-[#8047F8]"></i>{" "}
-                dinheiro
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
-
-            {products.map((item)=>{
-                <div
-               key={item.id} className="w-[45%] ">
-          <h1 className="text-xl font-bold mt-10">Cafés selecionados</h1>
-          <div className="bg-[#F3F2F2] flex gap-4 justify-between item-center rounded-2xl mt-4 px-10 py-4">
-            <div>
-              <img className="w-22 h-22" src={cofe1} alt="" />
-            </div>
-            <div>
-              <p className="my-2 font-bold">Expresso Tradicional</p>
-              <div className="flex gap-4">
-                <div className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
-                  <button
-                    onClick={() => decrease(item.id)}
-                    className="text-[#8047F8] font-bold hover:scale-125 transition"
-                  >
-                    −
-                  </button>
-
-                   <span className="font-semibold text-[#403937]">
-                    {item.count}
-                  </span>
-
-                  <button
-                    onClick={() => increase(item.id)}
-                    className="text-[#8047F8] font-bold hover:scale-125 transition"
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
-                  <button className="text-[#8047F8]  hover:scale-125 transition">
-                    <i class="fa-regular fa-trash-can"></i> Remover
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="mt-2 font-bold">
-              <p>R$ 9,90</p>
-            </div>
+        <div className="bg-[#F3F2F2] rounded-2xl mt-10 p-6">
+          <div className="flex justify-between">
+            <span>Cofelar narxi</span>
+            <span>{sum} $</span>
           </div>
-          <div className="bg-[#F3F2F2]  rounded-2xl mt-20 px-10">
-            <div className="flex flex-col gap-4 pt-6">
-              <div className="flex justify-between">
-                <h1>Cofelar narxi</h1>
-                <p>
-                  R$ <span></span>
-                </p>
-              </div>
-              <div class="flex justify-between">
-                <h1>Entrega</h1>
-                <p>
-                  R$ <span>0</span>
-                </p>
-              </div>
-              <div class="flex justify-between font-bold">
-                <h1>Total</h1>
-                <p>
-                  R$ <span></span>
-                </p>
-              </div>
-            </div>
-            <div className="pt-10 pb-5">
-              <button className="text-2xl cursor-pointer font-semibold text-[#fff] bg-[#DBAC2C] py-3 w-full rounded-xl">
-                Orqaga
-              </button>
-            </div>
+
+          <div className="flex justify-between">
+            <span>Yetkazib berish</span>
+            <span>{entrega} $</span>
           </div>
+
+          <div className="flex justify-between font-bold text-lg">
+            <span>Total</span>
+            <span>{total} $</span>
+          </div>
+
+          <button
+            onClick={() => navigate("/")}
+            className="mt-6 w-full bg-[#DBAC2C] text-white py-3 rounded-xl"
+          >
+            Orqaga
+          </button>
         </div>
-            })}
       </div>
     </div>
-  )
+    </div>
+  );
 }
 
 export default Orders;
