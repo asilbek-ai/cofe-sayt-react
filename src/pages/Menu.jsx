@@ -64,7 +64,7 @@ function Menu() {
     if (basket.length > 0) {
       navigate("/orders");
     } else {
-      alert("Mahsulot tanlang");
+      alert("cofe tanlang");
     }
   }
 
@@ -115,10 +115,14 @@ function Menu() {
                 <img
                   src={`/images/${item.img}`}
                   alt={item.name}
-                  className="w-44 animate-spin [animation-duration:5s] object-contain"
+                  className="w-34 animate-spin [animation-duration:5s] object-contain"
                 />
               </div>
-
+              <div className=" flex justify-center ">
+                <button className="text-[#C47F17] rounded-full mt-2 px-3 bg-[#F1E9C9]">
+                  Tradicional
+                </button>
+              </div>
               <p className="text-center text-xl font-bold mt-4">{item.name}</p>
 
               <p className="text-[#8D8686] text-center text-sm mt-3">
@@ -134,7 +138,7 @@ function Menu() {
                 <div className="flex items-center bg-[#E6E5E5] rounded-xl px-4 py-2 gap-4 text-lg">
                   <button
                     onClick={() => decrease(item.id)}
-                    className="text-[#8047F8] font-bold"
+                    className=" cursor-pointer text-[#8047F8] font-bold"
                   >
                     −
                   </button>
@@ -143,7 +147,7 @@ function Menu() {
 
                   <button
                     onClick={() => increase(item.id)}
-                    className="text-[#8047F8] font-bold"
+                    className=" cursor-pointer text-[#8047F8] font-bold"
                   >
                     +
                   </button>
